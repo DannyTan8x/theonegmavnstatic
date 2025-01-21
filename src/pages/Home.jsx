@@ -10,6 +10,10 @@ export default function Home() {
     let currentSectionIndex = 0;
     let isScrolling = false;
 
+    // Variables for touch control
+    let startY = 0;
+    let endY = 0;
+
     const scrollToSection = (index) => {
       if (index < 0 || index >= sections.length) return; // Out of bounds check
       isScrolling = true;
@@ -26,8 +30,9 @@ export default function Home() {
       }, 1000); // Adjust this time based on animation duration
     };
 
+    // Mouse wheel handler
     const handleWheel = (event) => {
-      if (isScrolling) return; // Prevent scrolling during animation
+      if (isScrolling) return; // Prevent multiple scrolls during animation
       event.preventDefault(); // Prevent default scrolling behavior
 
       const direction = event.deltaY > 0 ? 1 : -1; // Determine scroll direction
@@ -39,12 +44,51 @@ export default function Home() {
       }
     };
 
-    // Add wheel event listener
+    // Touch start handler
+    const handleTouchStart = (event) => {
+      startY = event.touches[0].clientY; // Get the initial touch Y position
+    };
+
+    // Touch move handler
+    const handleTouchMove = (event) => {
+      endY = event.touches[0].clientY; // Update the touch Y position as the finger moves
+    };
+
+    // Touch end handler
+    const handleTouchEnd = () => {
+      if (isScrolling) return; // Prevent multiple scrolls during animation
+
+      const direction = startY - endY; // Calculate the swipe direction
+      if (Math.abs(direction) > 50) {
+        // Only trigger if the swipe is significant
+        if (direction > 0) {
+          // Swipe up
+          if (currentSectionIndex < sections.length - 1) {
+            currentSectionIndex += 1;
+            scrollToSection(currentSectionIndex);
+          }
+        } else {
+          // Swipe down
+          if (currentSectionIndex > 0) {
+            currentSectionIndex -= 1;
+            scrollToSection(currentSectionIndex);
+          }
+        }
+      }
+    };
+
+    // Add event listeners for both mouse and touch controls
     window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd);
 
     return () => {
-      // Remove wheel event listener on cleanup
+      // Cleanup event listeners
       window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
 
@@ -145,7 +189,7 @@ export default function Home() {
         </div>
       </section>
       <section id="news">
-        <div className="container news justify-content-center justify-content-center   ">
+        <div className="container news justify-content-center justify-content-center  mt-5 py-5 ">
           <h2 className="responsive-font text-center libre-baskerville-regular fs-1">
             News
           </h2>
@@ -160,7 +204,7 @@ export default function Home() {
         </div>
       </section>
       <section id="contactus">
-        <div className="container contactus">
+        <div className="container contactus  mt-5 py-5 ">
           <div className="row flex-column flex-lg-row justify-content-center align-items-start justify-content-md-start align-items-md-start">
             <div className="col">
               <h2 className="responsive-font libre-baskerville-regular">

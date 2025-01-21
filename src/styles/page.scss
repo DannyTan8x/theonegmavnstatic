@@ -249,6 +249,9 @@ section{
         min-height: 40vh;
         max-width: 40vw;
         max-height: 60vh;
+        @media (max-width: 766px) {
+            max-width: 100vw;
+        }
     }
    
 }
