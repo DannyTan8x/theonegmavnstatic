@@ -36,11 +36,22 @@ export default function Home() {
       event.preventDefault(); // Prevent default scrolling behavior
 
       const direction = event.deltaY > 0 ? 1 : -1; // Determine scroll direction
-      const nextIndex = currentSectionIndex + direction;
 
-      if (nextIndex >= 0 && nextIndex < sections.length) {
-        currentSectionIndex = nextIndex;
-        scrollToSection(nextIndex);
+      const currentScroll = window.scrollY; // Current scroll position
+      const currentSection = sections[currentSectionIndex];
+      const sectionTop = currentSection.offsetTop; // Section's top position
+      const sectionBottom = sectionTop + currentSection.offsetHeight; // Section's bottom position
+
+      if (
+        (direction === 1 &&
+          currentScroll + window.innerHeight >= sectionBottom) || // Scroll down at bottom
+        (direction === -1 && currentScroll <= sectionTop) // Scroll up at top
+      ) {
+        const nextIndex = currentSectionIndex + direction;
+        if (nextIndex >= 0 && nextIndex < sections.length) {
+          currentSectionIndex = nextIndex;
+          scrollToSection(nextIndex);
+        }
       }
     };
 
@@ -155,7 +166,7 @@ export default function Home() {
       </section>
       <section id="service">
         <div className="container service">
-          <div className="row flex-sm-column-reverse flex-xl-row">
+          <div className="row flex-column-reverse  flex-md-row">
             <div className="col">
               <img
                 className="img-fluid"
@@ -189,14 +200,14 @@ export default function Home() {
         </div>
       </section>
       <section id="news">
-        <div className="container news justify-content-center justify-content-center  mt-5 py-5 ">
-          <h2 className="responsive-font text-center libre-baskerville-regular fs-1">
+        <div className="container news justify-content-center d-flex align-items-center d-md-block align-md-itmes-none mt-5 py-5 mt-md-5 py-md-5">
+          <h2 className="responsive-font text-center libre-baskerville-regular fs-1 mt-5 mt-md-1 py-md-1">
             News
           </h2>
           <p className="libre-baskerville-regular-italic responsive-font text-center fs-4">
             What’s New in Vietnam Certification
           </p>
-          <div className="row flex-column libre-baskerville-regular-italic flex-lg-row justify-content-center align-items-start justify-content-md-start align-items-md-start">
+          <div className="row flex-column justify-content-center libre-baskerville-regular-italic flex-lg-row align-items-center justify-md-content-start align-md-items-start">
             <div className="col newsbox">- 1</div>
             <div className="col newsbox">- 2</div>
             <div className="col newsbox">- 3</div>
@@ -204,7 +215,7 @@ export default function Home() {
         </div>
       </section>
       <section id="contactus">
-        <div className="container contactus  mt-5 py-5 ">
+        <div className="container contactus   mt-5 py-5 ">
           <div className="row flex-column flex-lg-row justify-content-center align-items-start justify-content-md-start align-items-md-start">
             <div className="col">
               <h2 className="responsive-font libre-baskerville-regular">
@@ -232,11 +243,11 @@ export default function Home() {
               </h2>
               <p>www.theone-gma.vn</p>
             </div>
-            <div className="col">
+            <div className="col atio ratio-16x9 ">
               <iframe
                 className="map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.91599516871543!2d106.84432601678863!3d10.837621610068728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317521b70140f657%3A0xec5bf58f0a4b507e!2sMinh%20An%20Homes!5e0!3m2!1szh-TW!2stw!4v1737343810309!5m2!1szh-TW!2stw"
-                allowFullScreen="true"
+                allowfullscreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
