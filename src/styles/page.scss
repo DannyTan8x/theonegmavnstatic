@@ -1,0 +1,268 @@
+// #home{
+//     padding-top: 100px;
+//     // height: 90vh;
+// }
+#home{
+    position: relative;
+    background-image: url("../assets/home.jpg");
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 100vh; /* Full viewport height */
+     // Add the blur and blue color overlay
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(59, 240, 253, 0.6); /* Blue tint with 40% opacity */
+    // filter: blur(10px); /* Apply blur */
+    z-index: 0; /* Ensure the overlay is on top of the background image */
+  }
+ 
+}
+#equipment{
+    background-color: #d9d9d9;
+}
+#news{
+    position: relative;
+    background-image: url("../assets/news.jpg");
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    min-height: 100vh; /* Full viewport height */
+     // Add the blur and blue color overlay
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    background: rgba(4, 45, 100, 0.6); /* Blue tint with 40% opacity */
+    // filter: blur(10px); /* Apply blur */
+    z-index: 0; /* Ensure the overlay is on top of the background image */
+  }
+ 
+}
+#contactus{
+    background-color: #f4f1ec;
+}
+section{
+    padding-top: 110px;
+    min-height: 100vh;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    
+    .container{
+        position: relative;
+     
+        bottom: 20px;
+        // background-color: bisque;
+        display: flex; /* Enables Flexbox */
+        flex-direction: column;
+        justify-content: center; /* Centers items horizontally */
+        // align-items: center; /* Centers items vertically */
+        min-height: 100vh; /* Makes the section take the full viewport height */
+
+        .btn{
+    
+            border-radius: 0;
+            width: 150px;
+            font-family: "inter";
+            font-weight: 600;
+        }   
+        
+    }
+    @media (max-width: 576px) {
+        padding: 5vw;
+    }
+}
+//個別section 的樣式
+.home{
+    color: white;
+    z-index: 2;
+    // width: 50vw;
+    text-wrap: wrap;
+    // font-size: 16px !important;
+
+    h2{
+        font-size: 3rem;
+    }
+    p{
+        width: 50vw;
+        font-size: 1.2rem;
+        color: black;
+        @media (max-width: 576px) {
+            width: 80vw;
+        }
+    }
+    .btn{
+        color: white;
+        background-color: #0097b2;
+       
+    }
+
+   
+}
+
+.equipment{
+    
+    color: black;
+    z-index: 2;
+
+    text-wrap: wrap;
+    // font-size: 16px !important;
+
+    h2{
+        // font-size: 3em;
+    }
+    ul{
+        width: 50vw;
+
+        color: black;
+        @media (max-width: 576px) {
+            width: 80vw;
+        }
+    }
+    
+    img{
+        @media (max-width: 576px) {
+            display: none;
+        }
+    }
+    .btn{
+        color: black;
+        background-color: #cdad7d;
+    }
+
+}
+
+
+.service{
+    position: relative;
+    color: black;
+    z-index: 2;
+    // width: 50vw;
+    text-wrap: wrap;
+    // font-size: 16px !important;
+    img{
+        // height: 50vh;
+        max-width: 40vw;
+        max-height: 50vh;
+        display: flex;
+        align-items: flex-start;
+        @media (max-width: 576px) {
+            // display: none;
+            position: absolute;
+            z-index: -1;
+            bottom: 0px;
+            right: 0px;
+            filter:blur(2px), ;
+        }
+    }
+    h2{
+        // font-size: 3em;
+    }
+
+    ul {
+        list-style: none; // Remove the default list-style
+        padding-left: 20px;
+        @media (max-width: 576px) {
+            width: 80vw;
+        }
+        
+
+      }
+      
+      ul li {
+        position: relative; // Allow positioning the marker
+        padding-left: 35px; // Add space for the image
+        margin-bottom: 2rem;
+      }
+      
+      ul li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 26px; // Adjust size
+        height: 35px; // Adjust size
+        background-image: url('../assets/servicesicon.svg');
+        background-size: cover; // Ensures the image fits within the width/height
+        background-repeat: no-repeat;
+      }
+        
+      .btn{
+        position: absolute;
+        color: white;
+        background-color: #0097b2;
+        right: 0;
+        bottom: 0;
+    }
+   
+}
+.news{
+    position: relative;
+    color: #cdad7d;
+    z-index: 2;
+    // width: 50vw;
+    text-wrap: wrap;
+    // font-size: 16px !important;
+    .newsbox{
+        // height: 50vh;
+        max-width: 80%;
+        max-height: 50vh;
+        min-height: 40vh;
+        display: flex;
+
+        justify-content: flex-start; /* Align content horizontally to the left */
+        align-items: flex-end;    /* Align content vertically to the bottom */
+            border: 2px solid #cdad7d; /* Solid border with black color */
+            padding: 10px;          /* Space inside the box */
+            text-align: center;     /* Center-align text inside the box */
+            margin: 10px;           /* Space outside the box */
+          
+    }
+}
+
+.contactus{
+    // position: relative;
+
+    z-index: 2;
+    // width: 50vw;
+    // text-wrap: wrap;
+    // font-size: 16px !important;
+    ul {
+   
+            // font-size: 1.4em ;
+            line-height: 2;
+   
+        list-style: none; // Remove the default list-style
+        padding-left: 20px; // Add space for the custom image
+      }
+    
+        
+    .map{
+        min-width: 40vw;
+        min-height: 40vh;
+        max-width: 40vw;
+        max-height: 60vh;
+    }
+   
+}
+
+.fontGold{
+    color: #cdad7d;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
