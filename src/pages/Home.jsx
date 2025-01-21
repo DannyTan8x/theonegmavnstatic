@@ -1,8 +1,53 @@
 // JSX File Example
+
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import "../styles/page.scss";
 
 export default function Home() {
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
+    let currentSectionIndex = 0;
+    let isScrolling = false;
+
+    const scrollToSection = (index) => {
+      if (index < 0 || index >= sections.length) return; // Out of bounds check
+      isScrolling = true;
+
+      const section = sections[index];
+      window.scrollTo({
+        top: section.offsetTop,
+        behavior: "smooth",
+      });
+
+      // Reset isScrolling after animation duration
+      setTimeout(() => {
+        isScrolling = false;
+      }, 1000); // Adjust this time based on animation duration
+    };
+
+    const handleWheel = (event) => {
+      if (isScrolling) return; // Prevent scrolling during animation
+      event.preventDefault(); // Prevent default scrolling behavior
+
+      const direction = event.deltaY > 0 ? 1 : -1; // Determine scroll direction
+      const nextIndex = currentSectionIndex + direction;
+
+      if (nextIndex >= 0 && nextIndex < sections.length) {
+        currentSectionIndex = nextIndex;
+        scrollToSection(nextIndex);
+      }
+    };
+
+    // Add wheel event listener
+    window.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      // Remove wheel event listener on cleanup
+      window.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
+
   return (
     <>
       <Navbar />

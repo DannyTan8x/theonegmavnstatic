@@ -75,7 +75,7 @@ export default function Navbar() {
           id="navbarSupportedContent"
         >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 justify-content-around">
-            <li className="nav-item">
+            <li className="nav-item ">
               <a
                 className={`nav-link ${
                   activeSection === "home" || activeSection === "equipment"

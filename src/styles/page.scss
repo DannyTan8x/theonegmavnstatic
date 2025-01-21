@@ -55,7 +55,7 @@ section{
     min-height: 100vh;
     padding-left: 10vw;
     padding-right: 10vw;
-    
+    scroll-snap-align: start;
     .container{
         position: relative;
      
@@ -173,8 +173,6 @@ section{
         @media (max-width: 576px) {
             width: 80vw;
         }
-        
-
       }
       
       ul li {
@@ -200,8 +198,8 @@ section{
         position: absolute;
         color: white;
         background-color: #0097b2;
-        right: 0;
-        bottom: 0;
+        right: 5vw;
+        bottom: 15vh;
     }
    
 }

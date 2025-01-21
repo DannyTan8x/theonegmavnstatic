@@ -5,7 +5,8 @@ import react from "@vitejs/plugin-react";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/theonegmavnstatic/", // Replace <repository-name> with your GitHub repository name
+  base: "/", // for custome domain
+  // base: "/theonegmavnstatic/", // Replace <repository-name> with your GitHub repository name
   // css: {
   //   preprocessorOptions: {
   //     scss: {
