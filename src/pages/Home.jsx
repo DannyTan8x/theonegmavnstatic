@@ -7,6 +7,7 @@ import "../styles/page.scss";
 export default function Home() {
   useEffect(() => {
     const sections = document.querySelectorAll("section");
+    const navbarLinks = document.querySelectorAll("nav a"); // Update selector to match your navbar links
     let currentSectionIndex = 0;
     let isScrolling = false;
 
@@ -93,6 +94,26 @@ export default function Home() {
       }
     };
 
+    // Navbar click handler
+    const handleNavbarClick = (event) => {
+      event.preventDefault();
+      const targetId = event.target.getAttribute("href").replace("#", "");
+      const targetSection = document.getElementById(targetId);
+
+      if (targetSection) {
+        const targetIndex = Array.from(sections).indexOf(targetSection);
+        if (targetIndex !== -1) {
+          currentSectionIndex = targetIndex; // Update the index
+          scrollToSection(targetIndex); // Scroll to the clicked section
+        }
+      }
+    };
+
+    // Add event listeners for navbar links
+    navbarLinks.forEach((link) => {
+      link.addEventListener("click", handleNavbarClick);
+    });
+
     // Add event listeners for both mouse and touch controls
     window.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
@@ -101,6 +122,9 @@ export default function Home() {
 
     return () => {
       // Cleanup event listeners
+      navbarLinks.forEach((link) => {
+        link.removeEventListener("click", handleNavbarClick);
+      });
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
@@ -109,7 +133,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="homepage">
       <Navbar />
       <section id="home">
         <div className="container home">
@@ -262,6 +286,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

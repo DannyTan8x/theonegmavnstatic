@@ -30,7 +30,7 @@
     .container {
         margin-top: 200px;
         border-radius: 60px;
-        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+        // transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
         @media (max-width: 992px) {
             margin-top: 20px;
             
@@ -180,6 +180,33 @@
                 color: #967f5c;
                 &.active {
                     color: white  !important;
+                    transition: color 0.3s ease-in-out;
+                }
+        
+                // Uncomment below for additional styles
+                // background-color: red;
+                // color: red;
+            }
+        }
+      }
+    .show {
+        
+        .nav-item {
+            display: flex; /* Ensure Flexbox is applied */
+            border-radius: 150px;
+            background-color: transparent;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            .nav-link {
+                font-family: "Inter", serif;
+                width: 150px;
+                text-align: center;
+                font-weight: 700  !important;
+                transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
+                color: black;
+                &.active {
+                    color: #967f5c  !important;
                     transition: color 0.3s ease-in-out;
                 }
         
