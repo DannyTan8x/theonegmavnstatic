@@ -1,226 +1,275 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
 
-.libre-baskerville-regular {
-    font-family: "Libre Baskerville", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-  .libre-baskerville-bold {
-    font-family: "Libre Baskerville", serif;
-    font-weight: 700;
-    font-style: normal;
-  }
-  
-  .libre-baskerville-regular-italic {
-    font-family: "Libre Baskerville", serif;
-    font-weight: 400;
-    font-style: italic;
-  }
-  
 .navbar {
+  // position: absolute;
+  // left: 0;
+  // top: 0;
+  .navbar-brand {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+  }
+  max-height: 0; /* or remove this */
+  .container {
+    // position: relative;
+    // margin-top: 120px;
+    border-radius: 60px;
+    // transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+    @media (max-width: 992px) {
+      margin-top: 20px;
 
-    .navbar-brand{
-        font-family: "Playfair Display", serif;
-        font-optical-sizing: auto;
-        font-weight: 500;
-        font-style: normal;
+      border-radius: 50px;
+      // padding: 15px !important;
     }
-    max-height: 0px;
-    .container {
-        margin-top: 200px;
-        border-radius: 60px;
-        // transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
-        @media (max-width: 992px) {
-            margin-top: 20px;
-            
-            border-radius: 50px;
-            padding: 15px  !important;
-            
-        }
-        @media  (max-width: 576px){
-            border-radius: 0;
-            margin-top: 0px;
-            padding: 2px  !important;
-        }
-        // Home section styling
+    @media (max-width: 576px) {
+      border-radius: 0;
+      margin-top: 0px;
+      // padding: 2px !important;
+    }
+    // Home section styling
     &.nav-home {
-        background-color: rgba(255, 255, 255, 0.5); // Bright blue
-        // .nav-item{
-        //     color: transparent;
-        // }
-        .nav-item {
-            display: flex; /* Ensure Flexbox is applied */
-            border-radius: 150px;
-            background-color:  rgba(47, 195, 206, 0.6);
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            .nav-link {
-                font-family: "Inter", serif;
-                width: 150px;
-                text-align: center;
-                font-weight: 700  !important;
-                transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
-                color: rgb(15, 55, 58);
-                &.active {
-                    color: white  !important;
-                    transition: color 0.3s ease-in-out;
-                }
-        
-                // Uncomment below for additional styles
-                // background-color: red;
-                // color: red;
-            }
-        }
-      
-      }
-    &.nav-equipment  {
-        background-color: rgba(255, 255, 255, 0.5); // Bright blue
-        .nav-item {
-            display: flex; /* Ensure Flexbox is applied */
-            border-radius: 150px;
-            background-color: rgba( #cdad7d ,0.6);
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            .nav-link {
-                font-family: "Inter", serif;
-                width: 150px;
-                text-align: center;
-                font-weight: 700  !important;
-                transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
-                color: #967f5c;
-                &.active {
-                    color: white  !important;
-                    transition: color 0.3s ease-in-out;
-                }
-        
-                // Uncomment below for additional styles
-                // background-color: red;
-                // color: red;
-            }
+      background-color: rgba(255, 255, 255, 0.5); // Bright blue
+      // .nav-item{
+      //     color: transparent;
+      // }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: rgba(48, 195, 206, 0.6); /* Blue tint with 40% opacity */
+        // filter: blur(10px); /* Apply blur */
+        z-index: -1; /* Ensure the overlay is on top of the background image */
+        @media (max-width: 992px) {
+          background: transparent; /* Blue tint with 40% opacity */
         }
       }
-  
-      // Service section styling
-      &.nav-service {
-        background-color:  rgba(255, 255, 255, 0.5); // Green
-        .nav-item {
-            display: flex; /* Ensure Flexbox is applied */
-            border-radius: 150px;
-            background-color:  rgba(47, 195, 206, 0.6);
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            .nav-link {
-                font-family: "Inter", serif;
-                width: 150px;
-                text-align: center;
-                font-weight: 700  !important;
-                transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
-                color: rgb(15, 55, 58);
-                &.active {
-                    color: white  !important;
-                    transition: color 0.3s ease-in-out;
-                }
-        
-                // Uncomment below for additional styles
-                // background-color: red;
-                // color: red;
-            }
+      .nav-item {
+        display: flex; /* Ensure Flexbox is applied */
+        border-radius: 150px;
+        background-color: rgba(47, 195, 206, 0.6);
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .nav-link {
+          font-family: "Inter", serif;
+          width: 150px;
+          text-align: center;
+          font-weight: 700 !important;
+          transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
+          color: rgb(15, 55, 58);
+          &.active {
+            color: white !important;
+            transition: color 0.3s ease-in-out;
+          }
+
+          // Uncomment below for additional styles
+          // background-color: red;
+          // color: red;
         }
       }
-  
-      // News section styling
-      &.nav-news {
-        background-color:  rgba(255, 255, 255, 0.5);  // Orange
-        .nav-item {
-            display: flex; /* Ensure Flexbox is applied */
-            border-radius: 150px;
-            background-color: rgba( #222344 ,0.6);
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            .nav-link {
-                font-family: "Inter", serif;
-                width: 150px;
-                text-align: center;
-                font-weight: 700  !important;
-                transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
-                color: #cdad7d;
-                &.active {
-                    color: white  !important;
-                    transition: color 0.3s ease-in-out;
-                }
-        
-                // Uncomment below for additional styles
-                // background-color: red;
-                // color: red;
-            }
+    }
+    &.nav-featured_service {
+      background-color: rgba(255, 255, 255, 0.5); // Bright blue
+      .nav-item {
+        display: flex; /* Ensure Flexbox is applied */
+        border-radius: 150px;
+        background-color: rgba(205, 173, 125, 0.6);
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .nav-link {
+          font-family: "Inter", serif;
+          width: 150px;
+          text-align: center;
+          font-weight: 700 !important;
+          transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
+          color: #967f5c;
+          &.active {
+            color: white !important;
+            transition: color 0.3s ease-in-out;
+          }
+
+          // Uncomment below for additional styles
+          // background-color: red;
+          // color: red;
         }
       }
-  
-      // Contact Us section styling
-      &.nav-contactus {
-        background-color: rgba(#cdad7d, 0.5); // Red
-        .nav-item {
-            display: flex; /* Ensure Flexbox is applied */
-            border-radius: 150px;
-            background-color: rgba( #cdad7d ,0.6);
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            .nav-link {
-                font-family: "Inter", serif;
-                width: 150px;
-                text-align: center;
-                font-weight: 700  !important;
-                transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
-                color: #967f5c;
-                &.active {
-                    color: white  !important;
-                    transition: color 0.3s ease-in-out;
-                }
-        
-                // Uncomment below for additional styles
-                // background-color: red;
-                // color: red;
-            }
+    }
+    &.nav-equipment {
+      background-color: rgba(255, 255, 255, 0.5); // Bright blue
+      .nav-item {
+        display: flex; /* Ensure Flexbox is applied */
+        border-radius: 150px;
+        background-color: rgba(205, 173, 125, 0.6);
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .nav-link {
+          font-family: "Inter", serif;
+          width: 150px;
+          text-align: center;
+          font-weight: 700 !important;
+          transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
+          color: #967f5c;
+          &.active {
+            color: white !important;
+            transition: color 0.3s ease-in-out;
+          }
+
+          // Uncomment below for additional styles
+          // background-color: red;
+          // color: red;
         }
       }
+    }
+
+    // Service section styling
+    &.nav-service {
+      background-color: rgba(255, 255, 255, 0.5); // Green
+      .nav-item {
+        display: flex; /* Ensure Flexbox is applied */
+        border-radius: 150px;
+        background-color: rgba(47, 195, 206, 0.6);
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .nav-link {
+          font-family: "Inter", serif;
+          width: 150px;
+          text-align: center;
+          font-weight: 700 !important;
+          transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
+          color: rgb(15, 55, 58);
+          &.active {
+            color: white !important;
+            transition: color 0.3s ease-in-out;
+          }
+
+          // Uncomment below for additional styles
+          // background-color: red;
+          // color: red;
+        }
+      }
+    }
+    &.nav-service-couintries {
+      background-color: rgba(255, 255, 255, 0.5); // Green
+      .nav-item {
+        display: flex; /* Ensure Flexbox is applied */
+        border-radius: 150px;
+        background-color: rgba(47, 195, 206, 0.6);
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .nav-link {
+          font-family: "Inter", serif;
+          width: 150px;
+          text-align: center;
+          font-weight: 700 !important;
+          transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
+          color: rgb(15, 55, 58);
+          &.active {
+            color: white !important;
+            transition: color 0.3s ease-in-out;
+          }
+
+          // Uncomment below for additional styles
+          // background-color: red;
+          // color: red;
+        }
+      }
+    }
+
+    // News section styling
+    &.nav-news {
+      background-color: rgba(255, 255, 255, 0.5); // Orange
+      .nav-item {
+        display: flex; /* Ensure Flexbox is applied */
+        border-radius: 150px;
+        background-color: rgba(34, 35, 68, 0.6);
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .nav-link {
+          font-family: "Inter", serif;
+          width: 150px;
+          text-align: center;
+          font-weight: 700 !important;
+          transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
+          color: #cdad7d;
+          &.active {
+            color: white !important;
+            transition: color 0.3s ease-in-out;
+          }
+
+          // Uncomment below for additional styles
+          // background-color: red;
+          // color: red;
+        }
+      }
+    }
+
+    // Contact Us section styling
+    &.nav-contactus {
+      background-color: rgba(205, 173, 125, 0.5);
+      .nav-item {
+        display: flex; /* Ensure Flexbox is applied */
+        border-radius: 150px;
+        background-color: rgba(205, 173, 125, 0.6);
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .nav-link {
+          font-family: "Inter", serif;
+          width: 150px;
+          text-align: center;
+          font-weight: 700 !important;
+          transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
+          color: #967f5c;
+          &.active {
+            color: white !important;
+            transition: color 0.3s ease-in-out;
+          }
+
+          // Uncomment below for additional styles
+          // background-color: red;
+          // color: red;
+        }
+      }
+    }
     .show {
-        
-        .nav-item {
-            display: flex; /* Ensure Flexbox is applied */
-            border-radius: 150px;
-            background-color: transparent;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            .nav-link {
-                font-family: "Inter", serif;
-                width: 150px;
-                text-align: center;
-                font-weight: 700  !important;
-                transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
-                color: black;
-                &.active {
-                    color: #967f5c  !important;
-                    transition: color 0.3s ease-in-out;
-                }
-        
-                // Uncomment below for additional styles
-                // background-color: red;
-                // color: red;
-            }
+      .nav-item {
+        display: flex; /* Ensure Flexbox is applied */
+        border-radius: 150px;
+        background-color: transparent;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .nav-link {
+          font-family: "Inter", serif;
+          width: 150px;
+          text-align: center;
+          font-weight: 700 !important;
+          transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
+          color: black;
+          &.active {
+            color: #967f5c !important;
+            transition: color 0.3s ease-in-out;
+          }
+
+          // Uncomment below for additional styles
+          // background-color: red;
+          // color: red;
         }
       }
-      
     }
-    @media  (min-width: 10px) {
-        height: 0px !important;
-        padding: 0px !important;
-        margin: 0px !important;
-    }
+  }
+  @media (min-width: 10px) {
+    height: 0px !important;
+    padding: 0px !important;
+    margin: 0px !important;
+  }
 }

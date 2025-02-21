@@ -1,37 +1,31 @@
-import { useEffect, useState } from "react";
-import "../styles/navbar.scss";
+import { useEffect, useState, useCallback } from "react";
+import { Link, useLocation } from "react-router-dom"; // Use NavLink for active state management
+
 import Logo from "../assets/Logo.png";
+
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
+  const location = useLocation();
 
-  // Handle active class dynamically
-  useEffect(() => {
-    const navLinks = document.querySelectorAll(".nav-link");
-    const navbarSupportedContent = document.getElementById(
-      "navbarSupportedContent"
-    );
-
-    navLinks.forEach((link) => {
-      link.addEventListener("click", function () {
-        // Remove 'active' class from all nav-links
-        navLinks.forEach((item) => item.classList.remove("active"));
-
-        // Add 'active' class to the clicked nav-link
-        this.classList.add("active");
-        // Collapse the navbar
-        if (navbarSupportedContent.classList.contains("show")) {
-          navbarSupportedContent.classList.remove("show");
-        }
+  const scrollToSection = useCallback((targetId) => {
+    console.log(targetId);
+    setActiveSection(targetId);
+    const targetSection = document.getElementById(targetId);
+    if (targetSection) {
+      window.scrollTo({
+        top: targetSection.offsetTop,
+        behavior: "smooth",
       });
-    });
-
-    //change style
+    }
+  }, []);
+  // Handle active class dynamically using IntersectionObserver
+  useEffect(() => {
     const sections = document.querySelectorAll("section");
     const options = {
       root: null, // Use the viewport as the root
       threshold: 0.5, // Trigger when 50% of the section is visible
     };
-
+    console.log("Scrolling");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -47,17 +41,31 @@ export default function Navbar() {
     return () => {
       sections.forEach((section) => observer.unobserve(section));
     };
-  }, []); // Empty array ensures this runs once after the component is mounted
+  }, [location]);
+  // Smooth scrolling for sections
 
+  useEffect(() => {
+    //Ensure smooth scroll works when navigating via links
+    if (location.hash) {
+      const targetSection = document.getElementById(location.hash.slice(1)); // remove "#" from hash.
+      if (targetSection) {
+        window.scrollTo({
+          top: targetSection.offsetTop,
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [location]);
   return (
-    <nav className="navbar navbar-expand-lg bg-white bg-opacity-75 sticky-top">
-      <div className={`container nav-${activeSection} `}>
+    <nav className="navbar navbar-expand-lg navbar-light bg-transparent fixed-top p-md-4">
+      <div className={`container nav-${activeSection} mt-md-5 `}>
         <img height="50px" src={Logo} alt="Logo" />
         <a
           className="navbar-brand d-flex flex-column col libre-baskerville-bold mx-2"
           href="#"
         >
-          <span>THE ONE</span> <span>ONE SOLUTION</span>
+          <span className="fs-3">THE ONE</span>{" "}
+          <span className="font-italic fs-6">ONE SOLUTION</span>
         </a>
         <button
           className="navbar-toggler"
@@ -75,48 +83,62 @@ export default function Navbar() {
           id="navbarSupportedContent"
         >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 justify-content-around">
-            <li className="nav-item ">
-              <a
+            <li className="nav-item">
+              <Link
                 className={`nav-link ${
-                  activeSection === "home" || activeSection === "equipment"
+                  activeSection === "home" ||
+                  activeSection === "featured_service" ||
+                  activeSection === "equipment"
                     ? "active"
                     : ""
                 }`}
-                aria-current="page"
-                href="#home"
+                // activeclassname="active"
+                // exact
+                to="/"
+                onClick={() => scrollToSection("home")}
               >
                 HOME
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a
+              <Link
                 className={`nav-link ${
-                  activeSection === "service" ? "active" : ""
+                  activeSection === "service" ||
+                  activeSection === "service-couintries"
+                    ? "active"
+                    : ""
                 }`}
-                href="#service"
+                // activeclassname="active"
+                // exact
+                to="/#service"
+                onClick={() => scrollToSection("service")}
               >
                 SERVICE
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a
+              <Link
                 className={`nav-link ${
                   activeSection === "news" ? "active" : ""
                 }`}
-                href="#news"
+                // activeclassname="active"
+                // exact
+                to="/#news"
+                onClick={() => scrollToSection("news")}
               >
                 NEWS
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a
+              <Link
                 className={`nav-link ${
                   activeSection === "contactus" ? "active" : ""
                 }`}
-                href="#contactus"
+                to="/contact"
+                // onClick={() => scrollToSection("contactus")}
               >
                 CONTACT US
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

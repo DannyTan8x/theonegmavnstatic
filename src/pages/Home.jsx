@@ -1,13 +1,12 @@
 // JSX File Example
 
-import React, { useEffect } from "react";
-import Navbar from "../components/Navbar";
-import "../styles/page.scss";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   useEffect(() => {
     const sections = document.querySelectorAll("section");
-    const navbarLinks = document.querySelectorAll("nav a"); // Update selector to match your navbar links
+
     let currentSectionIndex = 0;
     let isScrolling = false;
 
@@ -44,6 +43,7 @@ export default function Home() {
         const currentScroll = window.scrollY;
 
         const currentSection = sections[currentSectionIndex];
+        console.log("wheelSection:", currentSection);
         const sectionTop = currentSection.offsetTop;
         const sectionBottom = sectionTop + currentSection.offsetHeight;
 
@@ -94,26 +94,6 @@ export default function Home() {
       }
     };
 
-    // Navbar click handler
-    const handleNavbarClick = (event) => {
-      event.preventDefault();
-      const targetId = event.target.getAttribute("href").replace("#", "");
-      const targetSection = document.getElementById(targetId);
-
-      if (targetSection) {
-        const targetIndex = Array.from(sections).indexOf(targetSection);
-        if (targetIndex !== -1) {
-          currentSectionIndex = targetIndex; // Update the index
-          scrollToSection(targetIndex); // Scroll to the clicked section
-        }
-      }
-    };
-
-    // Add event listeners for navbar links
-    navbarLinks.forEach((link) => {
-      link.addEventListener("click", handleNavbarClick);
-    });
-
     // Add event listeners for both mouse and touch controls
     window.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
@@ -122,22 +102,17 @@ export default function Home() {
 
     return () => {
       // Cleanup event listeners
-      navbarLinks.forEach((link) => {
-        link.removeEventListener("click", handleNavbarClick);
-      });
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
-
   return (
     <div className="homepage">
-      <Navbar />
       <section id="home">
         <div className="container home">
-          <h2 className="libre-baskerville-regular responsive-font">
+          <h2 className="Inter-bold responsive-font fs-1">
             Product Certification <br />
             Expert
           </h2>
@@ -146,36 +121,105 @@ export default function Home() {
             compliance, bringing your products to market in Vietnam and
             Southeast Asia.
           </p>
-          <a className="btn" href="#equipment">
+          <a className="btn" href="#featured_service">
             LEARN MORE
           </a>
         </div>
       </section>
+      <section id="featured_service">
+        <div className="container featured_service ">
+          <h2 className=" m-3 responsive-font fs-1">
+            Featured service —— MIC ICT type approval certificate
+          </h2>
+          <div className="row flex-column flex-md-row my-md-2 responsive-font">
+            <div className="col d-flex justify-content-around">
+              <div className="d-flex flex-md-column justify-content-around align-items-center ">
+                <img
+                  className="img-thumbnail m-2"
+                  src="assets/ICT.png"
+                  alt="ICT with code"
+                  style={{
+                    maxHeight: "30vh",
+                    width: `${Math.min(
+                      window.innerHeight * 0.3,
+                      window.innerWidth * 0.3
+                    )}px`,
+                  }}
+                />
+                <img
+                  className="img-thumbnail m-2"
+                  src="assets/ICT2.png"
+                  alt="ICT"
+                  style={{
+                    maxHeight: "30vh",
+                    width: `${Math.min(
+                      window.innerHeight * 0.3,
+                      window.innerWidth * 0.3
+                    )}px`,
+                  }}
+                />
+              </div>
+            </div>
+            <div className="col d-flex flex-column align-items-end ">
+              <ul className="fs-1">
+                <li className="m-md-3">
+                  To enter Vietnam’s market, ICT manufacturers must obtain
+                  <br />
+                  <span className="text-danger font-weight-bold">
+                    -Type Approval Certificate (TAC);{" "}
+                  </span>
+                  and/or
+                  <br />
+                  <span className="text-danger font-weight-bold">
+                    -Declaration of Conformity (DoC)
+                  </span>
+                </li>
+                <li className="m-md-3">
+                  TAC is issued by VNTA based on MIC regulations, while DoC is
+                  required for import clearance. Certification follows different
+                  systems, including factory audits and shipment-based
+                  approvals.
+                </li>
+                <li className="m-md-3">
+                  After TAC and DoC, products need to be put on ICT Mark (ICT
+                  label) as shown on the left also.
+                </li>
+              </ul>
+              <div className="d-flex   position-absolute bottom-0 end-0">
+                <span>Want to know more about the process? ➡️</span>
+                <Link className="btn position-relative" to="/contact">
+                  CONTACT US
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <section id="equipment">
         <div className="container equipment ">
-          <h2 className="libre-baskerville-regular m-3 responsive-font">
+          <h2 className=" m-3 responsive-font fs-1">
             Equipment Required to Comply
           </h2>
           <div className="row flex-column flex-md-row my-5">
             <div className="col">
               <ul>
-                <li>
+                <li className="m-md-3">
                   Mobile phones, including feature phones and smartphones with
                   2G, 3G, 4G LTE, 5G, WLAN, and NFC.
                 </li>
-                <li>
+                <li className="m-md-3">
                   WLAN WiFi transmitters, such as access points, routers,
                   laptops, tablets, etc.
                 </li>
-                <li>
+                <li className="m-md-3">
                   2G, 3G, 4G LTE, and 5G NR terminals, RFID-enabled scanners,
                   and RFID readers.
                 </li>
-                <li>
+                <li className="m-md-3">
                   Smart TVs, WiFi-enabled set-top boxes, and wireless
                   receiver-enabled translators.
                 </li>
-                <li>
+                <li className="m-md-3">
                   And more. Get in touch with us to understand your products.
                 </li>
               </ul>
@@ -197,22 +241,22 @@ export default function Home() {
         <div className="container service">
           <div className="row flex-column-reverse  flex-md-row">
             <div className="col">
-              <img
-                className="img-fluid"
-                src="assets/services.jpg"
-                alt="Services"
-              />
+              <div className="d-flex justify-content-center">
+                <img
+                  className="img-fluid"
+                  src="assets/services.jpg"
+                  alt="Services"
+                />
+              </div>
             </div>
             <div className="col">
-              <h2 className="libre-baskerville-regular responsive-font">
-                Our Services
-              </h2>
+              <h2 className=" responsive-font fs-1">Our Services</h2>
               <p className="responsive-font">
                 We provide one-stop professional services in the field of
                 product compliance, making product certification faster and
                 simpler.
               </p>
-              <ul className="libre-baskerville-regular">
+              <ul className="">
                 <li>
                   <span className="serviceicon"></span>EMC /Safety/RF/Energy
                   efficiency
@@ -221,67 +265,75 @@ export default function Home() {
                 <li>Local Representative</li>
                 <li>And More.</li>
               </ul>
-              <a className="btn" href="#contactus">
-                GET IN TOUCH
-              </a>
+              <div className="d-flex flex-column justify-content-center align-items-center position-absolute bottom-0 end-0">
+                <p>over 200 countries</p>
+                <Link
+                  className="btn position-relative text-center"
+                  to="/service"
+                >
+                  Our service countries
+                </Link>
+                {/* <a className="btn text-center" href="#contactus">
+                  Our service countries
+                </a> */}
+              </div>
             </div>
           </div>
         </div>
       </section>
       <section id="news">
         <div className="container news justify-content-center ">
-          <h2 className="responsive-font text-center libre-baskerville-regular fs-1 ">
-            News
-          </h2>
-          <p className="libre-baskerville-regular-italic responsive-font text-center fs-4">
+          <h2 className="responsive-font text-center  fs-1 ">News</h2>
+          <p className="-italic responsive-font text-center fs-4">
             What’s New in Vietnam Certification
           </p>
-          <div className="row flex-column flex-md-row libre-baskerville-regular-italic newscontainer ">
-            <div className="col newsbox">- 1</div>
-            <div className="col newsbox">- 2</div>
-            <div className="col newsbox">- 3</div>
-          </div>
-        </div>
-      </section>
-      <section id="contactus">
-        <div className="container contactus">
-          <div className="row flex-column flex-md-row pt-5">
-            <div className="col">
-              <h2 className="responsive-font libre-baskerville-regular">
-                Contact Us
-              </h2>
-              <ul className="fontGold">
+          <div className="row flex-column flex-md-row -italic newscontainer ">
+            <div className="col newsbox">
+              <p>- 1</p>
+              <ul className="text-white">
                 <li>
-                  <i className="material-icons">location_on</i>:
+                  MIC has issued Circular No. 04/2023 in which the new QCVN
+                  117:2023/BTTTT.
                 </li>
+                <li>For more details, please visit:</li>
                 <li>
-                  <i className="material-icons">phone</i>:
-                </li>
-                <li>
-                  <i className="material-icons">email</i>:
+                  <a href="https://www.glodacert.co/post/vietnam-mic-releases-new-notice-related-to-qcvn-117-2023-btttt-2024-jan-4">
+                    Vietnam MIC releases new notice related to QCVN
+                    117:2023/BTTTT (2024-Jan.-4) (glodacert.co){" "}
+                  </a>
                 </li>
               </ul>
-              <h2 className="responsive-font libre-baskerville-regular">
-                Office Hours
-              </h2>
-              <p className="fontGold responsive-font">Monday to Friday</p>
-              <p>8:00 am to 5:00 pm</p>
-              <p className="fontGold responsive-font">
-                Closed on Saturdays and Sundays
-              </p>
-              <h2 className="responsive-font libre-baskerville-regular">
-                Follow us online
-              </h2>
-              <p>www.theone-gma.vn</p>
             </div>
-            <div className="col atio ratio-4x3 ">
-              <iframe
-                className="map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.91599516871543!2d106.84432601678863!3d10.837621610068728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317521b70140f657%3A0xec5bf58f0a4b507e!2sMinh%20An%20Homes!5e0!3m2!1szh-TW!2stw!4v1737343810309!5m2!1szh-TW!2stw"
-                allowfullscreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+            <div className="col newsbox">
+              <p>- 2</p>
+              <ul className="text-white">
+                <li>
+                  Vietnam enforces ITC- Safety in 2024 and MEPS in 2025
+                  (2023-Dec.-14)
+                </li>
+                <li>For more details, please visit:</li>
+                <li>
+                  <a href="https://www.glodacert.co/post/vietnam-enforces-itc-safety-in-2024-and-meps-in-2025-2023-dec-14">
+                    https://www.glodacert.co/post/vietnam-enforces-itc-safety-in-2024-and-meps-in-2025-2023-dec-14
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="col newsbox">
+              <p>- 2</p>
+              <ul className="text-white">
+                <li>
+                  MIC has introduced Circular 20/2023/TT-BTTTT and the
+                  corresponding National Technical Regulation (QCVN
+                  117:2023/BTTTT)
+                </li>
+                <li>For more details, please visit:</li>
+                <li>
+                  <a href="https://www.glodacert.co/post/vietnam-circular-20-2023-tt-btttt">
+                    https://www.glodacert.co/post/vietnam-circular-20-2023-tt-btttt
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
