@@ -1,4 +1,8 @@
+import { useEffect } from "react";
 const Contact = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on component mount
+  }, []);
   return (
     <section id="contactus">
       <div className="container contactus">
@@ -8,30 +12,54 @@ const Contact = () => {
             <ul className="fontGold">
               <li>
                 <i className="material-icons">location_on</i> :
-                <p>
+                <p className="text-black">
                   V3-37 Vinhomes Grand Park, 512 Nguyễn Xiển, Phường Long Bình,
                   Thành Phố Thủ Đức
                 </p>
               </li>
               <li>
-                <i className="material-icons">phone</i> :<p>0369-614-293</p>
+                <i className="material-icons">phone</i> :
+                <p className="text-black">0369-614-293</p>
               </li>
               <li>
                 <i className="material-icons">email</i> :
-                <p>sofia.trang@theone-gma.vn / service@theone-gma.vn</p>
+                <p className="text-black">
+                  sofia.trang@theone-gma.vn / service@theone-gma.vn
+                </p>
+              </li>
+              <li className="d-flex ">
+                <div className="d-flex flex-column">
+                  <span>Zalo:</span>
+                  <img
+                    src="assets/Zalo.png"
+                    alt="Zalo"
+                    className="img-thumbnail"
+                  />
+                </div>
+                <div className="d-flex flex-column">
+                  <span>Line:</span>
+                  <img
+                    src="assets/Line.jpg"
+                    alt="Line"
+                    className="img-thumbnail"
+                  />
+                </div>
+                <div className="d-flex flex-column">
+                  <span>Wechat:</span>
+                  <img
+                    src="assets/Wechat.png"
+                    alt="Wechat"
+                    className="img-thumbnail"
+                  />
+                </div>
               </li>
               <li>
-                <span>Zalo:</span> :
-                <img src="assets/Zalo.png" alt="Zalo" />
+                <span>Follow us online</span>
               </li>
-              <li>
-                <span>Line:</span> :
-                <img src="assets/Line.jpg" alt="Line" />
-              </li>
-              <li>
-                <span>Wechat:</span> :
-                <img src="assets/Wechat.png" alt="Wechat" />
-              </li>
+              <div className="socialmedia fs-1 d-flex ">
+                <i className="bi bi-facebook fs-1 mx-2 " aria-hidden="true"></i>
+                <i className="bi bi-linkedin fs-1 mx-2 " aria-hidden="true"></i>
+              </div>
             </ul>
 
             {/* <h2 className="responsive-font ">

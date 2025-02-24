@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Service = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on component mount
+  }, []);
   return (
     <section id="service-couintries">
       <div className="container service-couintries text-white">
-        <h2 className="text-center responsive-font fs-1 my-5">
+        <h2 className="text-center responsive-font fs-1 mt-5">
           Our Service Countries
         </h2>
-        <div className="row flex-column-reverse  flex-md-row">
+        <div className="row  flex-md-row">
           <div className="col flex-1">
             <img
               className="img-fluid rounded-5"
@@ -58,7 +62,7 @@ const Service = () => {
                 <span className="text-danger">200+countries. </span>
               </p>
             </div>
-            <Link className="btn end-0" to="/contact">
+            <Link className="btn end-0" to="/contact" tabIndex={-1}>
               CONTACT US
             </Link>
           </div>

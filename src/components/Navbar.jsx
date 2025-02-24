@@ -1,15 +1,16 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom"; // Use NavLink for active state management
-
+import { useScroll } from "../context/ScrollContext"; // Import context
 import Logo from "../assets/Logo.png";
 
 export default function Navbar() {
-  const [activeSection, setActiveSection] = useState("home");
+  const { activeSection, setActiveSection, setSectionIndex } = useScroll();
   const location = useLocation();
 
-  const scrollToSection = useCallback((targetId) => {
+  const scrollToSection = useCallback((targetId, index) => {
     console.log(targetId);
     setActiveSection(targetId);
+    setSectionIndex(index); // Update section index for Home scrolling
     const targetSection = document.getElementById(targetId);
     if (targetSection) {
       window.scrollTo({

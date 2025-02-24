@@ -1,13 +1,15 @@
 // JSX File Example
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useScroll } from "../context/ScrollContext"; // Import scroll context
 
 export default function Home() {
+  const { sectionIndex, setSectionIndex, setActiveSection } = useScroll();
   useEffect(() => {
     const sections = document.querySelectorAll("section");
 
-    let currentSectionIndex = 0;
+    let currentSectionIndex = sectionIndex;
     let isScrolling = false;
 
     // Variables for touch control
@@ -23,7 +25,7 @@ export default function Home() {
         top: section.offsetTop,
         behavior: "smooth",
       });
-
+      setActiveSection(section.id); // Update global state
       // Reset isScrolling after animation duration
       setTimeout(() => {
         isScrolling = false;
@@ -55,6 +57,7 @@ export default function Home() {
           const nextIndex = currentSectionIndex + direction;
           if (nextIndex >= 0 && nextIndex < sections.length) {
             currentSectionIndex = nextIndex;
+            setSectionIndex(nextIndex);
             scrollToSection(nextIndex);
           }
         }
@@ -83,12 +86,14 @@ export default function Home() {
           if (currentSectionIndex < sections.length - 1) {
             currentSectionIndex += 1;
             scrollToSection(currentSectionIndex);
+            setSectionIndex(sectionIndex);
           }
         } else {
           // Swipe down
           if (currentSectionIndex > 0) {
             currentSectionIndex -= 1;
-            scrollToSection(currentSectionIndex);
+            setSectionIndex(currentSectionIndex);
+            scrollToSection(sectionIndex);
           }
         }
       }
@@ -108,11 +113,40 @@ export default function Home() {
       window.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
+  const sectionRefs = useRef([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      },
+      { threshold: 0.3 } // Trigger when 30% of the section is visible
+    );
+
+    sectionRefs.current.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    return () => {
+      sectionRefs.current.forEach((section) => {
+        if (section) observer.unobserve(section);
+      });
+    };
+  }, []);
+
   return (
     <div className="homepage">
-      <section id="home">
+      <section
+        id="home"
+        ref={(el) => (sectionRefs.current[0] = el)}
+        className="hidden"
+      >
         <div className="container home">
-          <h2 className="Inter-bold responsive-font fs-1">
+          <h2 className="Inter-bold responsive-font fs-1 ">
             Product Certification <br />
             Expert
           </h2>
@@ -126,7 +160,11 @@ export default function Home() {
           </a>
         </div>
       </section>
-      <section id="featured_service">
+      <section
+        id="featured_service"
+        ref={(el) => (sectionRefs.current[1] = el)}
+        className="hidden"
+      >
         <div className="container featured_service ">
           <h2 className=" m-3 responsive-font fs-1">
             Featured service —— MIC ICT type approval certificate
@@ -195,7 +233,11 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section id="equipment">
+      <section
+        id="equipment"
+        ref={(el) => (sectionRefs.current[2] = el)}
+        className="hidden"
+      >
         <div className="container equipment ">
           <h2 className=" m-3 responsive-font fs-1">
             Equipment Required to Comply
@@ -237,7 +279,11 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section id="service">
+      <section
+        id="service"
+        ref={(el) => (sectionRefs.current[3] = el)}
+        className="hidden"
+      >
         <div className="container service">
           <div className="row flex-column-reverse  flex-md-row">
             <div className="col">
@@ -269,7 +315,7 @@ export default function Home() {
                 <p>over 200 countries</p>
                 <Link
                   className="btn position-relative text-center"
-                  to="/service"
+                  to="/service-couintries"
                 >
                   Our service countries
                 </Link>
@@ -281,14 +327,18 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section id="news">
+      <section
+        id="news"
+        ref={(el) => (sectionRefs.current[4] = el)}
+        className="hidden"
+      >
         <div className="container news justify-content-center ">
           <h2 className="responsive-font text-center  fs-1 ">News</h2>
           <p className="-italic responsive-font text-center fs-4">
             What’s New in Vietnam Certification
           </p>
-          <div className="row flex-column flex-md-row -italic newscontainer ">
-            <div className="col newsbox">
+          <div className=" newscontainer">
+            <div className="newsbox">
               <p>- 1</p>
               <ul className="text-white">
                 <li>
@@ -304,7 +354,7 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-            <div className="col newsbox">
+            <div className=" newsbox">
               <p>- 2</p>
               <ul className="text-white">
                 <li>
@@ -314,13 +364,13 @@ export default function Home() {
                 <li>For more details, please visit:</li>
                 <li>
                   <a href="https://www.glodacert.co/post/vietnam-enforces-itc-safety-in-2024-and-meps-in-2025-2023-dec-14">
-                    https://www.glodacert.co/post/vietnam-enforces-itc-safety-in-2024-and-meps-in-2025-2023-dec-14
+                    Vietnam-enforces-itc-safety-in-2024-and-meps-in-2025-2023-dec-14
                   </a>
                 </li>
               </ul>
             </div>
-            <div className="col newsbox">
-              <p>- 2</p>
+            <div className=" newsbox">
+              <p>- 3</p>
               <ul className="text-white">
                 <li>
                   MIC has introduced Circular 20/2023/TT-BTTTT and the
@@ -330,7 +380,7 @@ export default function Home() {
                 <li>For more details, please visit:</li>
                 <li>
                   <a href="https://www.glodacert.co/post/vietnam-circular-20-2023-tt-btttt">
-                    https://www.glodacert.co/post/vietnam-circular-20-2023-tt-btttt
+                    vietnam-circular-20-2023-tt-btttt
                   </a>
                 </li>
               </ul>
